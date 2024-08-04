@@ -2,11 +2,13 @@ import html2text
 import requests
 from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
+import time
 
 def fetch_and_convert(url):
     """Fetch the HTML content of a URL and convert it to plain text."""
 
     response = requests.get(url)
+    time.sleep(5)
 
     if response.status_code == 200:
         html_content = response.text
@@ -61,9 +63,16 @@ def write_output(search_results):
     for i in search_results:
         count += 1
         x = fetch_and_convert(i)
-        print(i)
         with open(f"txt_written/link_{count}.txt", "w", encoding="utf-8") as f:
             f.write(x)
+            # print(f"Written {i} to link_{count}.txt")
+            x = ""
     return f"Written {count} files."
 
-print(write_output(google_search("Python programming")))
+# print(write_output(google_search("Python")))
+
+# print(google_search("Python"))
+
+# x = fetch_and_convert('https://www.codecademy.com/catalog/language/python')
+# with open("txt_written/codecademy_python.txt", "w", encoding="utf-8") as f:
+#     f.write(x)

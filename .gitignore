@@ -3,3 +3,4 @@ test_example.py
 __pycache__/
 chromedriver.exe
 txt_written/
+.env
